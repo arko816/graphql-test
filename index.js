@@ -2,8 +2,7 @@ const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 const gql = require('graphql-tag');
 const mongoose=require('mongoose')
-const MONGODB="mongodb+srv://arko:1234@cluster0.c2tetrx.mongodb.net/?retryWrites=true&w=majority"
-
+const MONGODB=
 const veTypeDefs = require('./graphql/typeDefs');
 const resolvers=require('./graphql/resolvers');
 const app = express();
