@@ -1,10 +1,16 @@
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
+<<<<<<< HEAD
 const mongoose = require('mongoose');
 const { mergeTypeDefs, mergeResolvers } = require('@graphql-tools/merge');
 
 const MONGODB = "mongodb+srv://arko:1234@cluster0.c2tetrx.mongodb.net/?retryWrites=true&w=majority";
 
+=======
+const gql = require('graphql-tag');
+const mongoose=require('mongoose')
+const MONGODB=
+>>>>>>> origin/main
 const veTypeDefs = require('./graphql/typeDefs');
 const vcTypeDefs = require('./graphql/typeDefsc');
 const resolvers = require('./graphql/resolvers');
