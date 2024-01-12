@@ -1,20 +1,31 @@
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
+<<<<<<< HEAD
+const mongoose = require('mongoose');
+const { mergeTypeDefs, mergeResolvers } = require('@graphql-tools/merge');
+
+const MONGODB = "mongodb+srv://arko:1234@cluster0.c2tetrx.mongodb.net/?retryWrites=true&w=majority";
+
+=======
 const gql = require('graphql-tag');
 const mongoose=require('mongoose')
 const MONGODB=
+>>>>>>> origin/main
 const veTypeDefs = require('./graphql/typeDefs');
-const resolvers=require('./graphql/resolvers');
+const vcTypeDefs = require('./graphql/typeDefsc');
+const resolvers = require('./graphql/resolvers');
+const resolversc = require('./graphql/resolversc');
+
 const app = express();
-// const app = express();
+
 async function startServer() {
-  
-//   app.use(cors()); // Enable CORS middleware
+  // Merge type definitions and resolvers
+  const mergedTypeDefs = mergeTypeDefs([veTypeDefs, vcTypeDefs]);
+  const mergedResolvers = mergeResolvers([resolvers, resolversc]);
 
   const server = new ApolloServer({
-    typeDefs: veTypeDefs,
-    resolvers: resolvers,
-    // context: ({ req }) => createApolloContext({ req }),
+    typeDefs: mergedTypeDefs,
+    resolvers: mergedResolvers,
   });
 
   await server.start(); // Start the Apollo Server
@@ -28,26 +39,9 @@ async function startServer() {
   });
 }
 
-startServer().catch(error => {
+startServer().catch((error) => {
   console.error('Error starting server:', error);
 });
-// const server= new ApolloServer({
-//     typeDefs: veTypeDefs,
-//     resolvers: resolvers,
-//     context: ({ req }) => createApolloContext({ req }),
-// });
 
-mongoose.connect(MONGODB)
-// .then(()=>{
-//     console.log('Mongodb connection established');
-//     // return server.listen({port:5000});
-// })
-// .then((res)=>{
-//     console.log(`Server running at ${res.url}`);
-// })
+mongoose.connect(MONGODB);
 
-
-// const port = process.env.APP_SERVICE_PORT || 8001;
-// app.listen(port, () => {
-//     console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`);
-//   });

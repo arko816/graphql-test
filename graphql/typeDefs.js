@@ -1,28 +1,37 @@
 const { gql } = require('apollo-server-express');
 
-
 const veTypeDefs = gql`
-type Recipe{
-    name:String,
-    description:String
-    createdAt:String
-    thumbsUp:Int
-    thumbsDown:Int
-}
-input RecipeInput{
-    name:String
-    description:String
-}
-type Query{
-    recipe(ID: ID!): Recipe!
-    getRecipe(amount:Int):[Recipe]
-}
-type Mutation{
-    createRecipe(recipeInput: RecipeInput):Recipe!
-    deleteRecipe(ID:ID!):Boolean
-    editRecipe(ID:ID!,recipeInput: RecipeInput):Boolean
-}
+  type Product {
+    _id: ID
+    name: String
+    description: String
+    createdAt: String
+    category: [Category]
+  }
+
+  input ProductInput {
+    name: String
+    description: String
+  }
+
+  type Category {
+    _id: ID
+    name: String
+    description: String  
+    createdAt: String
+  }
+
+  type Query {
+    product(ID: ID!): Product!
+    getProduct(amount: Int): [Product]
+    getProductsAndCategories(amount: Int, description: String): [Product]
+  }
+
+  type Mutation {
+    createProduct(ProductInput: ProductInput): Product
+    deleteProduct(ID: ID!): Boolean
+    editProduct(ID: ID!, ProductInput: ProductInput): Boolean
+  }
 `;
 
-module.exports=veTypeDefs
-
+module.exports = veTypeDefs;
